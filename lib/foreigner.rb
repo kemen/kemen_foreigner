@@ -37,6 +37,7 @@ end
 Foreigner.register 'mysql', 'foreigner/connection_adapters/mysql_adapter'
 Foreigner.register 'mysql2', 'foreigner/connection_adapters/mysql_adapter'
 Foreigner.register 'postgresql', 'foreigner/connection_adapters/postgresql_adapter'
+Foreigner.register 'sqlserver', 'foreigner/connection_adapters/sqlserver_adapter'
 
 if defined?(Rails::Railtie)
   module Foreigner
