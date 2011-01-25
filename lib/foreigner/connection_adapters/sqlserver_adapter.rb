@@ -17,7 +17,7 @@ module Foreigner
         execute "alter table #{table} add constraint #{constraint_name} primary key (#{options[:column]})"
       end
 
-      def k_remove_primary_key(table, column)
+      def remove_primary_key(table, column)
         constraint_name = "pk_#{table}_#{options[:column]}"
         execute "alter table #{table} drop constraint #{constraint_name}"
       end
