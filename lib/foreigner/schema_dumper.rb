@@ -40,7 +40,6 @@ module Foreigner
         if (primary_keys = @connection.pk(table_name)).any?
 
            add_primary_keys_statement = primary_keys.map do |primary_key|
-             p primary_key
              if primary_key[:pk] != 'id'
                statement_parts = [('add_primary_key ' + table_name.inspect)]
                statement_parts << (':column => ' + primary_key[:pk].inspect)
