@@ -1,5 +1,6 @@
 module Foreigner
   module SchemaDumper
+
     def self.included(base)
       base.class_eval do
         include InstanceMethods
@@ -37,8 +38,7 @@ module Foreigner
       end
 
       def primary_keys(table_name,stream)
-        if (primary_keys = @connection.pk(table_name)).any?
-
+        if (primary_keys = @connection.pk(table_name)).any? && table_name != "sysdiagrams"
            add_primary_keys_statement = primary_keys.map do |primary_key|
              if primary_key[:pk] != 'id'
                statement_parts = [('add_primary_key ' + table_name.inspect)]

@@ -2,7 +2,7 @@
  
 Gem::Specification.new do |s|
   s.name = 'kemen_foreigner'
-  s.version = '0.0.3'
+  s.version = '0.0.4'
   s.summary = 'Foreign keys for Rails'
   s.description = ''
 
