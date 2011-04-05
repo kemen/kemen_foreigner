@@ -12,7 +12,17 @@ module Foreigner
 
         execute "ALTER TABLE #{quote_table_name(table)} DROP CONSTRAINT #{quote_column_name(foreign_key_name)}"
       end
-      
+
+      def add_primary_key(table,options)
+        constraint_name = "pk_#{table}_#{options[:column]}"
+        execute "alter table #{table} add constraint #{constraint_name} primary key (#{options[:column]})"
+      end
+
+      def remove_primary_key(table, options)
+        constraint_name = "pk_#{table}_#{options[:column]}"
+        execute "alter table #{table} drop constraint #{constraint_name}"
+      end      
+
       def foreign_keys(table_name)
         fk_info = select_all %{
           SELECT tc.constraint_name as name
