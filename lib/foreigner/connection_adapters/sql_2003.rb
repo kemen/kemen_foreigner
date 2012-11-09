@@ -10,12 +10,13 @@ module Foreigner
         foreign_key_name = foreign_key_name(from_table, column, options)
         primary_key = options[:primary_key] || "id"
         dependency = dependency_sql(options[:dependent])
-
+        
         sql =
           "ALTER TABLE #{quote_table_name(from_table)} " +
           "ADD CONSTRAINT #{quote_column_name(foreign_key_name)} " +
           "FOREIGN KEY (#{quote_column_name(column)}) " +
           "REFERENCES #{quote_table_name(ActiveRecord::Migrator.proper_table_name(to_table))}(#{primary_key})"
+        sql << " ON UPDATE CASCADE" if(primary_key.to_sym == :name)
         sql << " #{dependency}" if dependency.present?
         sql << " #{options[:options]}" if options[:options]
 
@@ -27,7 +28,7 @@ module Foreigner
           if options[:name]
             options[:name]
           else
-            "#{table}_#{column}_fk"
+            "fk_#{table}_#{column}"
           end
         end
 
